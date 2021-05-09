@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
         required: true,
         unique: true,
     },
-    appIDs: [{
+    appIds: [{
         type: mongoose.Types.ObjectId,
         ref: 'apps'
     }],

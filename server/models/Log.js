@@ -7,8 +7,8 @@ const logSchema = mongoose.Schema({
         required: true,
     },
     level: {
-        enum: [ "error", "warn", "verbose", "info", "debug", "silly" ],
-        description: "can only be one of the enum values and is required",
+        enum: ["error", "warn", "verbose", "info", "debug", "silly"],
+        description: "Can only be one of the enum values and is required",
         required: true,
     },
     description_message: {
@@ -20,13 +20,13 @@ const logSchema = mongoose.Schema({
         required: true,
     },
     description_severity: {
-        enum: [ 1,2,3,4,5,null ],
-        required: false,
+        enum: [1, 2, 3, 4, 5],
+        required: true,
     },
-    created_at    : { 
-        type: Date, 
-        required: true, 
-        default: Date.now 
+    created_at: {
+        type: Date,
+        required: true,
+        default: Date.now
     },
     // description_[additionalProps: String] -- strict: false
 })

@@ -14,10 +14,11 @@ const appSchema = mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'logs',
     }],
-    counts:[
+    counts: [
         {
             level: Number,
-            count: Number
+            count: Number,
+            incidentCount: Number
         }
     ],
     webhooks: [{
@@ -26,7 +27,7 @@ const appSchema = mongoose.Schema({
             entity: String,
             count: Number
         },
-        url:{
+        url: {
             type: String,
         }
     }],

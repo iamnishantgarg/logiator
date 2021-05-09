@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
 const keySchema = mongoose.Schema({
-   value: {
+    value: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     label: {
         type: String,
         required: true,
-        unique: true,
     },
     user: {
         type: mongoose.Types.ObjectId,
