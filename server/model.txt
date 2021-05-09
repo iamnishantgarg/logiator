@@ -1,0 +1,37 @@
+// visualization 
+
+Columns picker
+
+// Monitoring
+// Post /user/log
+{
+	appId: uuid
+	level:  String
+			error - red 
+			warn - yellow
+			verbose - purple
+			info - green
+			debug - orange
+			silly - rainbow
+	
+	description: {
+		message: String,	
+		environment: String
+		severity: (optional) 1-5 (dark-light)
+		[additionalProps: String]
+	}, 
+}
+
+User
+	Dashboard 
+		Application 
+		 -id (unique)
+		 -level count severity
+		 	-webhook (MS/Slack)
+		 -Clear history button
+		Counts 
+
+
+
+Conditions + 
+	Level/Seve
