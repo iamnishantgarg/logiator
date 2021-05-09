@@ -16,7 +16,9 @@ const appSchema = mongoose.Schema({
     }],
     counts: [
         {
-            level: Number,
+            level: {
+                enum: ["error", "warn", "verbose", "info", "debug", "silly"]
+            },
             count: Number,
             incidentCount: Number
         }
@@ -27,7 +29,7 @@ const appSchema = mongoose.Schema({
             entity: String,
             count: Number
         },
-        url: {
+        curl: {
             type: String,
         }
     }],
