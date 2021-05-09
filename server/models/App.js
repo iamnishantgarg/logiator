@@ -16,7 +16,10 @@ const appSchema = mongoose.Schema({
     }],
     counts: [
         {
-            level: Number,
+            level: {
+                type: String,
+                enum: ["error", "warning", "verbose", "info", "debug", "silly"]
+            },
             count: Number,
             incidentCount: Number
         }
