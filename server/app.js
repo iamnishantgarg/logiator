@@ -1,8 +1,11 @@
 const express = require('express'),
     PORT = process.env.PORT || 5000,
     connectDb = require('./config/db'),
-    userRoutes = require('./routes/user'),
     bodyParser = require('body-parser');
+
+//routes
+const userRoutes = require('./routes/user'),
+    keysRoutes = require('./routes/keys');
 
 // initialising app
 const app = express();
@@ -16,6 +19,9 @@ connectDb();
 
 //user apis
 app.use('/user', userRoutes);
+
+//keys api
+app.use('/keys', keysRoutes);
 
 app.get('/', (req, res, next) => {
     return res.send('welcome');

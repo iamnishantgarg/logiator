@@ -15,6 +15,6 @@ const keySchema = mongoose.Schema({
         ref: 'users',
         required: true,
     },
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model("key", keySchema);

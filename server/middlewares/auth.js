@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken'),
     USER = require('../models/User'),
     config = require('../config'),
-    KEY = require('../models/Key');
+    KEY = require('../models/Key'),
+    mongoose = require('mongoose');
 
 exports.verifyUser = async (req, res, next) => {
     const token = req.header("x-auth-token");
@@ -10,7 +11,7 @@ exports.verifyUser = async (req, res, next) => {
     }
     try {
         const decoded = await jwt.verify(token, config.jwtSecret);
-        const user = await USER.findOne({ _id: decoded.user.id });
+        const user = await USER.findOne({ _id: mongoose.Types.ObjectId(decoded.user.id) });
         if (!user) throw "User not found";
         req.user = decoded.user;
         next();
