@@ -1,7 +1,8 @@
 const express = require("express"),
     PORT = process.env.PORT || 5000,
     connectDb = require("./config/db"),
-    bodyParser = require("body-parser");
+    bodyParser = require("body-parser"),
+    cors = require('cors');
 
 //routes
 const userRoutes = require("./routes/user"),
@@ -11,6 +12,7 @@ const userRoutes = require("./routes/user"),
 
 // initialising app
 const app = express();
+app.use(cors());
 app.use(express.json());
 //parsing body
 app.use(bodyParser({ extended: false }));

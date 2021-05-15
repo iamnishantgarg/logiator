@@ -1,7 +1,7 @@
 const _ = require('lodash'),
     App = require('../models/App'),
     mongoose = require('mongoose'),
-    User = require('../models/User')
+    User = require('../models/User'),
     ObjectId = mongoose.SchemaTypes.ObjectId; // TODO: Add all ObjectID validations
 
 exports.createApp = async(user, appName) => {
