@@ -15,22 +15,23 @@ router.post("/:id", async (req, res) => { // :id is AppID
   } catch (error) {
     console.error("Something went wrong.", error);
     res.status(500).json({
-      error: "Something went wrong",
+      error: error.message ||  "Something went wrong",
     });
   }
 });
 
-// Get all apps of user
+// Get logs by filter
 router.get("/", async (req, res) => {
   try {
-    
+    let {userID, filter, page, limit} = req.body 
+    let data = await logsController.getLogsForFilter(userID, filter, page, limit)
     res.status(200).json({
       data,
     });
   } catch (error) {
     console.error("Something went wrong.", error);
     res.status(500).json({
-      error: "Something went wrong",
+      error: error.message ||  "Something went wrong",
     });
   }
 });
