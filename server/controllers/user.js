@@ -6,7 +6,6 @@ const _ = require('lodash'),
 
 // register user
 exports.signUp = async (req, res, next) => {
-    console.log("Here");
     const { name, email, password, phone } = req.body;
     if (_.isNil(name) || _.isNil(email) || _.isNil(password) || _.isNil(phone)) {
         return res.status(400).json({ message: "mandatory field missing" })
