@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "306fb89e-b0d4-409b-9023-de5f5732715b",
+		"name": "Logiator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Neil\",\n    \"email\": \"neildahiya1@gmail.com\",\n    \"password\": \"abcd1234\",\n    \"phone\": 9034268660\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/user",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign In",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"neildahiya1@gmail.com\",\n    \"password\": \"abcd1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/user/signin",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create App",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": \"609f92a8d0fce687a9caeab5\",\n    \"appName\": \"neilApp1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/app",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"app"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete App",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"appID\": \"609f999873dcc889252cb503\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/app",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"app"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all apps for user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-consumer-username",
+						"value": "609f92a8d0fce687a9caeab5",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/app",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"app"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Log",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"log\": {\n        \"level\": \"warning\",\n        \"description\": {\n            \"Name\": \"Neil\"\n        },\n        \"environment\": \"staging\",\n        \"severity\": 1\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/logs/609fa5502be0918f0ec8cb57",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"logs",
+						"609fa5502be0918f0ec8cb57"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get App Details by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/app/609fa5502be0918f0ec8cb57",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"app",
+						"609fa5502be0918f0ec8cb57"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Webhook",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"appID\": \"609fb273d896ca915f077241\",\n    \"condition\": {\n        \"logLevel\": \"warning\",\n        \"count\": 12,\n        \"comparision\": \"gte\"\n    },\n    \"url\": \"www.google.com\",\n    \"message\": \"Well hello there\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/app/webhook",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"app",
+						"webhook"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get logs by Filter",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userID\" : \"609f92a8d0fce687a9caeab5\",\n    \"filter\": {\n        \"appID\": \"609fb273d896ca915f077241\"\n    },\n    \"page\": 0,\n    \"limit\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/logs",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"logs"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -26,9 +26,12 @@ const appSchema = mongoose.Schema({
     ],
     webhooks: [{
         condition: {
-            comparison: String,
-            entity: String,
+            comparision: String,
+            logLevel: String,
             count: Number
+        },
+        meta: {
+            type: Object
         },
         url: {
             type: String,
