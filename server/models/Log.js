@@ -1,25 +1,28 @@
 const mongoose = require('mongoose');
 
 const logSchema = mongoose.Schema({
-    appId: {
+    appID: {
         type: mongoose.Types.ObjectId,
         ref: 'apps',
         required: true,
     },
     level: {
-        enum: ["error", "warn", "verbose", "info", "debug", "silly"],
+        type: String,
+        enum: ["error", "warning", "verbose", "info", "debug", "silly"],
         description: "Can only be one of the enum values and is required",
         required: true,
     },
-    description_message: {
+    description: {
         type: String,
         required: true,
     },
-    description_environment: {
+    environment: {
         type: String,
+        enum: ["development", "staging", "production"],
         required: true,
     },
-    description_severity: {
+    severity: {
+        type: Number,
         enum: [1, 2, 3, 4, 5],
         required: true,
     },
@@ -28,7 +31,6 @@ const logSchema = mongoose.Schema({
         required: true,
         default: Date.now
     },
-    // description_[additionalProps: String] -- strict: false
 })
 
 module.exports = mongoose.model("log", logSchema);

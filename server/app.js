@@ -1,31 +1,35 @@
-const express = require('express'),
+const express = require("express"),
     PORT = process.env.PORT || 5000,
-    connectDb = require('./config/db'),
-    bodyParser = require('body-parser');
+    connectDb = require("./config/db"),
+    bodyParser = require("body-parser");
 
 //routes
-const userRoutes = require('./routes/user'),
-    keysRoutes = require('./routes/keys');
+const userRoutes = require("./routes/user"),
+    appRoutes = require("./routes/app"),
+    logsRoutes = require("./routes/logs"),
+    keysRoutes = require("./routes/keys");
 
 // initialising app
 const app = express();
-
+app.use(express.json());
 //parsing body
 app.use(bodyParser({ extended: false }));
 
 //connecting to db
 connectDb();
 
-
 //user apis
-app.use('/user', userRoutes);
+app.use("/user", userRoutes);
+//keys apis
+app.use("/keys", keysRoutes);
+//app apis
+app.use("/app", appRoutes); // TODO : APIKEY Validation
+//logs apis
+app.use("/logs", logsRoutes);
 
-//keys api
-app.use('/keys', keysRoutes);
-
-app.get('/', (req, res, next) => {
-    return res.send('welcome');
-})
+app.get("/", (req, res, next) => {
+    return res.send("welcome");
+});
 
 app.listen(PORT, (err) => {
     if (err) {
@@ -33,4 +37,4 @@ app.listen(PORT, (err) => {
         return process.exit(0);
     }
     console.log(`Server is up on port: ${PORT}`);
-})
+});
