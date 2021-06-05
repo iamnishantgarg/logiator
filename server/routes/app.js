@@ -1,12 +1,12 @@
 const router = require("express").Router();
 const appController = require("../controllers/app");
-const { route } = require("./logs");
-const {verifyUser} = require('../middlewares/auth')
+const {verifyUser, verifyApiKey} = require('../middlewares/auth')
 
 // Create app
-router.post("/", verifyUser,  async (req, res) => {
+router.post("/", verifyApiKey,  async (req, res) => {
     try {
-        const { user, appName } = req.body;
+        const { appName } = req.body;
+        const user = req.user.id
         const data = await appController.createApp(user, appName);
         res.status(201).json({
             data,
@@ -74,9 +74,9 @@ router.put("/:id",verifyUser, async (req, res) => {
 });
 
 // Get all apps of user
-router.get("/", verifyUser,  async (req, res) => {
+router.get("/", verifyApiKey,  async (req, res) => {
     try {
-        const userID = req.headers["x-consumer-username"];
+        const userID = req.user.id
         const data = await appController.getAllApps(userID);
         res.status(200).json({
             data,
