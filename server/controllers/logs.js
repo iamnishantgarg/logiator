@@ -29,10 +29,11 @@ exports.addLog = async (log, appID) => {
     app.counts.forEach((countObj) => {
         if (countObj.level === level) {
             countObj.count += 1;
+            countObj.incidentCount += 1;
         }
     });
-    await app.save();
     // TODO : Check webhooks and run them if condition matches and reset count
+    await app.save();
     return {
         status: "Added log",
     };
