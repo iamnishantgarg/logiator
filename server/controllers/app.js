@@ -2,7 +2,7 @@ const _ = require("lodash"),
     App = require("../models/App"),
     mongoose = require("mongoose"),
     User = require("../models/User");
-ObjectId = mongoose.SchemaTypes.ObjectId; // TODO: Add all ObjectID validations
+const ObjectId = mongoose.SchemaTypes.ObjectId; // TODO: Add all ObjectID validations
 
 exports.createApp = async (user, appName) => {
     if (!user || !appName) {
@@ -50,7 +50,7 @@ exports.deleteApp = async (appID) => {
 
 exports.getAppDetails = async (appID) => {
     // TODO : Use aggregation query to add pagination on nested properties like logs
-    let app = await App.findById(appID).populate("Log");
+    let app = await App.findById(appID).select("-logs")
     console.log(app);
     return app;
 };

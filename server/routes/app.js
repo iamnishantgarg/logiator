@@ -1,11 +1,12 @@
 const router = require("express").Router();
 const appController = require("../controllers/app");
-const { route } = require("./logs");
+const {verifyUser, verifyApiKey} = require('../middlewares/auth')
 
 // Create app
-router.post("/", async (req, res) => {
+router.post("/", verifyApiKey,  async (req, res) => {
     try {
-        const { user, appName } = req.body;
+        const { appName } = req.body;
+        const user = req.user.id
         const data = await appController.createApp(user, appName);
         res.status(201).json({
             data,
@@ -18,7 +19,7 @@ router.post("/", async (req, res) => {
 });
 
 // Delete app
-router.delete("/", async (req, res) => {
+router.delete("/", verifyUser,  async (req, res) => {
     try {
         const { appID } = req.body;
         const data = await appController.deleteApp(appID);
@@ -33,7 +34,7 @@ router.delete("/", async (req, res) => {
 });
 
 // Add Webhook/Condition for app
-router.put("/webhook", async (req, res) => {
+router.put("/webhook",verifyUser, async (req, res) => {
     try {
         const { appID, condition, url, message } = req.body;
         console.log(appID, condition, url, message);
@@ -54,7 +55,7 @@ router.put("/webhook", async (req, res) => {
 });
 
 // Reset counter for app by level -- If no level passed reset all counters
-router.put("/:id", async (req, res) => {
+router.put("/:id",verifyUser, async (req, res) => {
     try {
         let levels = [];
         if (req.body.levels) {
@@ -73,9 +74,9 @@ router.put("/:id", async (req, res) => {
 });
 
 // Get all apps of user
-router.get("/", async (req, res) => {
+router.get("/", verifyApiKey,  async (req, res) => {
     try {
-        const userID = req.headers["x-consumer-username"];
+        const userID = req.user.id
         const data = await appController.getAllApps(userID);
         res.status(200).json({
             data,
@@ -88,7 +89,7 @@ router.get("/", async (req, res) => {
 });
 
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", verifyUser, async (req, res) => {
     try {
         const appID = req.params.id;
         const data = await appController.getAppDetails(appID);
