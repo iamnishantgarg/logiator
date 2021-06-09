@@ -2,8 +2,9 @@ const _ = require("lodash"),
     App = require("../models/App"),
     Log = require("../models/Log"),
     mongoose = require("mongoose"),
-    User = require("../models/User");
-ObjectId = mongoose.SchemaTypes.ObjectId; // TODO: Add all ObjectID validations
+    axios = require('axios'),
+    User = require("../models/User"),
+    ObjectId = mongoose.SchemaTypes.ObjectId; // TODO: Add all ObjectID validations
 
 exports.addLog = async (log, appID) => {
     if (!log || !appID) {
@@ -33,6 +34,19 @@ exports.addLog = async (log, appID) => {
         }
     });
     // TODO : Check webhooks and run them if condition matches and reset count
+    app.webhooks.forEach(webhook=>{
+        let currentCountObj = app.counts.find(({level}) => level===webhook.condition.logLevel)
+        if(currentCountObj.incidentCount>=webhook.condition.count) {
+            console.log("Make the call"); 
+            axios.post(webhook.url, webhook.meta)
+              .then(function (response) {
+                console.log(response.data);
+              }).catch(err=>{
+                  console.log(err);
+              })
+            currentCountObj.incidentCount = 0;
+        }
+    })
     await app.save();
     return {
         status: "Added log",
