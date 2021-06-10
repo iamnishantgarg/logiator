@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const logsController = require("../controllers/logs");
-const {verifyApiKey} = require('../middlewares/auth')
+const {verifyApiKey,verifyUser} = require('../middlewares/auth')
 
 
 // Add Log
@@ -21,7 +21,7 @@ router.post("/:id",verifyApiKey, async (req, res) => { // :id is AppID
 });
 
 // Get logs by filter
-router.get("/",verifyApiKey, async (req, res) => {
+router.get("/",verifyUser, async (req, res) => {
   try {
     let {filter, page, limit} = req.body 
     let userID = req.user.id
