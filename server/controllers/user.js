@@ -25,7 +25,7 @@ exports.signUp = async (req, res, next) => {
                 id: user.id
             }
         }
-        jwt.sign(tokenPayload, config.jwtSecret, { expiresIn: 360000 }, (err, token) => {
+        jwt.sign(tokenPayload, config.jwtSecret, (err, token) => {
             if (err) throw err;
             return res.status(200).json({ message: "successfully created user", token: token })
         })
@@ -56,7 +56,7 @@ exports.signIn = async (req, res, next) => {
             }
         }
         jwt.sign(tokenPayload, config.jwtSecret,
-            { expiresIn: 360000 }, (err, token) => {
+            (err, token) => {
                 if (err) throw err;
                 return res.status(200).json({ message: 'login successful', token });
             })

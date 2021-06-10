@@ -3,7 +3,7 @@ const appController = require("../controllers/app");
 const {verifyUser, verifyApiKey} = require('../middlewares/auth')
 
 // Create app
-router.post("/", verifyApiKey,  async (req, res) => {
+router.post("/", verifyUser,  async (req, res) => {
     try {
         const { appName } = req.body;
         const user = req.user.id
@@ -74,7 +74,7 @@ router.put("/:id",verifyUser, async (req, res) => {
 });
 
 // Get all apps of user
-router.get("/", verifyApiKey,  async (req, res) => {
+router.get("/", verifyUser,  async (req, res) => {
     try {
         const userID = req.user.id
         const data = await appController.getAllApps(userID);
