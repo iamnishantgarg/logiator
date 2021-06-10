@@ -37,7 +37,7 @@ exports.deleteKey = async (req, res, next) => {
 //get all keys
 exports.getAllKeys = async (req, res, next) => {
     try {
-        const keys = await KEY.find({ user: req.user.id }, ["label", "id"]).sort({ 'createdAt': -1 });
+        const keys = await KEY.find({ user: req.user.id }, ["label", "id",'createdAt']).sort();
         return res.status(200).json({ message: "successfully fetched api keys", data: keys });
     } catch (err) {
         console.log(err);
