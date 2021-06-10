@@ -21,7 +21,7 @@ router.post("/:id",verifyApiKey, async (req, res) => { // :id is AppID
 });
 
 // Get logs by filter
-router.get("/",verifyUser, async (req, res) => {
+router.put("/",verifyUser, async (req, res) => {
   try {
     let {filter, page, limit} = req.body 
     let userID = req.user.id
