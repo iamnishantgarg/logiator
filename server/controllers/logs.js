@@ -57,7 +57,7 @@ exports.getLogsForFilter = async (
     userID,
     filter = {},
     page = 0,
-    limit = 20
+    limit = 200
 ) => {
     if(!userID) throw new Error(`userID not present`)
     let logs, count, data={}, appIDs;
