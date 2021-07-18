@@ -38,11 +38,11 @@ exports.addLog = async (log, appID) => {
         let currentCountObj = app.counts.find(({level}) => level===webhook.condition.logLevel)
         if(currentCountObj.incidentCount>=webhook.condition.count) {
             console.log("Make the call"); 
-            axios.post(webhook.url, webhook.meta)
+            axios.post(webhook.url, {text:JSON.stringify(webhook.meta)})
               .then(function (response) {
                 console.log(response.data);
               }).catch(err=>{
-                  console.log(err);
+                  console.log('is mein galat');
               })
             currentCountObj.incidentCount = 0;
         }
